@@ -13,10 +13,8 @@ export const readAllcat = (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
 
@@ -35,10 +33,8 @@ export const readCat = (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
 
@@ -52,10 +48,8 @@ export const createCat = (req: Request, res: Response) => {
       data: { data },
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
 
@@ -78,10 +72,8 @@ export const updateCat = (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
 
@@ -104,10 +96,8 @@ export const updatePartialCat = (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
 
@@ -121,9 +111,7 @@ export const deleteCat = (req: Request, res: Response) => {
       data: newCat,
     });
   } catch (error) {
-    res.status(400).send({
-      success: false,
-      error: error.message,
-    });
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({ success: false, error: message });
   }
 };
