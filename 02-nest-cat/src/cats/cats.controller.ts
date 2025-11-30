@@ -1,4 +1,4 @@
-import { AuthService } from './../auth/auth.service.spec';
+import { AuthService } from '../auth/auth.service.spec';
 import {
   Controller,
   Get,

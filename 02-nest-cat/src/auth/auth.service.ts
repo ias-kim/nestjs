@@ -1,4 +1,4 @@
-import { CatsRepository } from './../cats/cats.repository';
+import { CatsRepository } from '../cats/cats.repository';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { LoginRequestDto } from './dto/login.request.dto';
 import * as bcrypt from 'bcrypt';
