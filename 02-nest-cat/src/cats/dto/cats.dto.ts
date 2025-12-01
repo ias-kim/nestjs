@@ -5,7 +5,7 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class ReadOnlyCatDto extends PickType(Cat, ['email', 'name'] as const) {
     @ApiProperty({
-        example: 'hellcom',
+        example: '43801199',
         description: 'id',
         required: true,
     })

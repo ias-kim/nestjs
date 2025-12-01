@@ -10,14 +10,9 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }),
-    CatsModule,
-    AuthModule,
+    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }]),
+    forwardRef(() => AuthModule),
   ],
   controllers: [CatsController],
   providers: [CatsService, CatsRepository],

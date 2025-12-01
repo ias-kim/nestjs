@@ -49,7 +49,7 @@ export class CatsController {
   })
   @ApiResponse({
     status: 500,
-    description: 'ㅅ실패',
+    description: '실패',
   })
   @ApiOperation({ summary: '회원가입' })
   @Post()

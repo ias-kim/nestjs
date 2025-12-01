@@ -34,6 +34,11 @@ export class Cat extends Document {
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty({
+    example: 'a2222',
+    description: 'password',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -45,7 +50,7 @@ export class Cat extends Document {
   @IsString()
   imgUrl: string;
 
-  readonly readOnlyData: { id: string, email: string, name: string };
+  readonly readOnlyData: { id: string; email: string; name: string };
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);

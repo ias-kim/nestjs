@@ -16,7 +16,7 @@ export class CatsRepository {
     const cat = await this.catModel.findOne({ email });
     return cat;
   }
-
+  
   async existByEmail(email: string): Promise<boolean> {
     try {
         const result = await this.catModel.exists({ email });
