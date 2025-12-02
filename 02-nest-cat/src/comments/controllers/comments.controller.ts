@@ -1,6 +1,6 @@
 import { CommentsService } from './../services/comments.service';
 import { Response } from 'express';
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Patch } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { CommentsCreateDto } from '../dto/comments.create.dto';
 
@@ -30,7 +30,7 @@ export class CommentsController {
   @ApiOperation({
     summary: '좋아요 수 올리기',
   })
-  @Post(':id')
+  @Patch(':id')
   async plusLike(
     @Param('id') id: string,
   ) {

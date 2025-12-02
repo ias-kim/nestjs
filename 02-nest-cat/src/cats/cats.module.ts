@@ -7,6 +7,7 @@ import { CatsRepository } from './cats.repository';
 import { AuthModule } from 'src/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
+import { CommentsSchema, Comments } from 'src/comments/comments.schema';
 
 @Module({
   imports: [
@@ -15,7 +16,10 @@ import { MulterModule } from '@nestjs/platform-express';
       dest: './upload', // dest -> 어디에다가 저장이 되는지
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    MongooseModule.forFeature([{ name: Cat.name, schema: CatSchema }]),
+    MongooseModule.forFeature([
+      { name: Cat.name, schema: CatSchema },
+      { name: Comments.name, schema: CommentsSchema},
+    ]),
     forwardRef(() => AuthModule),
   ],
   controllers: [CatsController],
