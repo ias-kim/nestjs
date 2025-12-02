@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly catsRepositoy: CatsRepository) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // 헤더에 추출
-            secretOrKey: 'secretKey', // 임시 키
+            secretOrKey: process.env.JWT_SECRET, // 임시 키
             ignoreExpiration: false,  // 만료기간 
         });
     }
@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         if (cat) {
             return cat; // request.user
         } else {
-            throw new UnauthorizedException('접그 오류');
+            throw new UnauthorizedException('접근 오류');
         }
     }
 }

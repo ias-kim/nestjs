@@ -15,6 +15,7 @@ import { CatsRepository } from 'src/cats/cats.repository';
 
     JwtModule.register({
       secret: process.env.JWT_SECRET,
+    
       signOptions: { expiresIn: '1y' },
     }),
 

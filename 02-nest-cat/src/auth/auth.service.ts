@@ -7,7 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
     constructor (
-        private readonly CatsRepository: CatsRepository,
+        private readonly catsRepository: CatsRepository,
         private jwtService: JwtService,
     ) {}
 
@@ -15,7 +15,7 @@ export class AuthService {
         const {email, password} = data;
 
         // 이메일 확인
-        const cat = await this.CatsRepository.findCatByEmail(email);
+        const cat = await this.catsRepository.findCatByEmail(email);
 
         if (!cat) {
             throw new UnauthorizedException('이메일과 비밀번호를 확인해주세요.');
