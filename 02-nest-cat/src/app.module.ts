@@ -8,10 +8,13 @@ import * as mongoose from 'mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { CommentsModule } from './comments/comments.module';
+import { AwsService } from './aws/aws.service';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true, // aws 서비스 안에서 config가 가능해진다.
+    }),
     MongooseModule.forRoot(process.env.MONGODB_URI!, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -23,7 +26,7 @@ import { CommentsModule } from './comments/comments.module';
     CommentsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AwsService],
 })
 export class AppModule implements NestModule {
   private readonly isDev: boolean = process.env.MODE === 'dev' ? true : false;

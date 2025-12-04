@@ -74,15 +74,21 @@ export class CatsController {
   }
 
   @ApiOperation({ summary: '고양이 이미지 업로드' })
-  @UseInterceptors(FilesInterceptor('image', 10, multerOptions("cats")))
+  @UseInterceptors(
+    AmazonS3FileInterceptor('image', {
+      dynamicPath: 'name',
+    }),
+  )
+  // @UseInterceptors(FilesInterceptor('image', 10, multerOptions('cats')))
   @UseGuards(JwtAuthGuard)
   @Post('upload')
-  uploadCatImg(@UploadedFiles() files: Array<Express.Multer.File>, 
-  @CurrentUser() cat: Cat)
-  {
-    console.log(files);
-    //return { image: `http://localhost:8000/media/cats/${files[0].filename}` };
-    return this.catsService.uploadImg(cat, files);
+  uploadCatImg(
+    @UploadedFile() file: Array<Express.Multer.File>,
+    @CurrentUser() cat: Cat,
+  ) {
+    console.log(file);
+    // return { image: `http://localhost:8000/media/cats/${files[0].filename}` };
+    return this.catsService.uploadImg(cat, file);
   }
 
   @ApiOperation({ summary: '모든 고양이 가져오기' })
