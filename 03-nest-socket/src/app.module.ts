@@ -3,18 +3,15 @@ import * as mongoose from 'mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { ChatsModule } from './chats/chats.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI!, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }),
+    MongooseModule.forRoot(process.env.MONGODB_URI!),
+    ChatsModule,
   ],
   controllers: [AppController],
   providers: [],
