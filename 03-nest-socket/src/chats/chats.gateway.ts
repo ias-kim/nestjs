@@ -12,7 +12,7 @@ import {
 
 //
 
-@WebSocketGateway()
+@WebSocketGateway({ namespace: 'chattings' })
 export class ChatsGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
@@ -20,6 +20,10 @@ export class ChatsGateway
 
   constructor() {
     this.logger.log('constructor');
+  }
+
+  afterInit() {
+    this.logger.log('init');
   }
 
   handleDisconnect(@ConnectedSocket() socket: Socket) {
@@ -30,17 +34,13 @@ export class ChatsGateway
     this.logger.log(`connected: ${socket.id} ${socket.nsp.name}`);
   }
 
-  afterInit() {
-    this.logger.log('init');
-  }
-
   @SubscribeMessage('new_user')
   handleNewUser(
     @MessageBody() username: string,
     @ConnectedSocket() socket: Socket,
   ) {
-    console.log(socket.id); // tK2pnE7CkcE40tbyAAAD
-    console.log(username);
-    socket.emit('hello_user', 'hello ' + username);
+    // username db에 적재
+    socket.broadcast.emit('user_connected', username);
+    return username;
   }
 }
